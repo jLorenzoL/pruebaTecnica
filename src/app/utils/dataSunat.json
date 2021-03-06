@@ -1,0 +1,38 @@
+[
+    {
+        "tipoPersona" : 1,
+        "rucSunat"    : "12345678912",
+        "numDocAdic"  : "12345678",
+        "razonSocial" : "Abecedario S.A.",
+        "estContr"    : "Activo",
+        "condDomi"    : "Habido",
+        "tipoVia"     : "",
+        "nombVia"     : "Avenida 123",
+        "numDomic"    : "530",
+        "intDomic"    : "2-A",
+        "loteDomic"   : "Lt. A",
+        "departamento": "Lima",
+        "mznDomic"    : "mza. 6",
+        "kmDomic"     : "km. 10",
+        "ubigeo"      : ""
+
+    },
+    {
+        "tipoPersona" : 1,
+        "rucSunat"    : "12345678912",
+        "numDocAdic"  : "12345678",
+        "razonSocial" : "Abecedario S.A.",
+        "estContr"    : "Suspecion",
+        "condDomi"    : "No Habido",
+        "tipoVia"     : "",
+        "nombVia"     : "Prolongacion 456",
+        "numDomic"    : "1202",
+        "intDomic"    : "",
+        "loteDomic"   : "Lt. B",
+        "departamento": "Lima",
+        "mznDomic"    : "mza. 2",
+        "kmDomic"     : "km. 2",
+        "ubigeo"      : ""
+    }
+
+]

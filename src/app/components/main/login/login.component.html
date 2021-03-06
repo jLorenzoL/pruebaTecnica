@@ -1,0 +1,48 @@
+<!-- <div class="container"> -->
+    <div class="row justify-content-center align-items-center bg-succes" style="padding-top: 20%;">
+        <div class="col-sm-5">
+            <div class="row justify-content-center">
+                <h5 class="text-center">¡Ingresa tu solicitud!</h5>
+                <div class="col-sm-12">
+                    <form novalidate  [formGroup]="loginForm" (submit)="login()">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <input type="text" [required] class="form-control" formControlName="userFormControl"
+                                        placeholder="Usuario"
+                                        [ngClass]="{'is-invalid': loginForm.get('userFormControl').errors && (loginForm.get('userFormControl').touched || 
+                                                        loginForm.get('userFormControl').dirty), 'is-valid':loginForm.get('userFormControl').valid}">
+    
+                                </div>
+    
+                            </div>
+    
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <input type="password" class="form-control" formControlName="pwdFormControl"
+                                        placeholder="Password"
+                                        [ngClass]="{'is-invalid': loginForm.get('pwdFormControl').errors && (loginForm.get('pwdFormControl').touched || 
+                                                        loginForm.get('pwdFormControl').dirty), 'is-valid':loginForm.get('pwdFormControl').valid}">
+                                </div>
+                            </div>
+    
+                        </div>
+                        
+                        <div class="buttons-row row">
+                            <div class="col-sm-12">
+                                <button class="btn-block" mat-flat-button color="primary">Ingresar ></button>
+                            </div>
+    
+                        </div>
+                    </form>
+                </div>
+    
+            </div>
+    
+        </div>
+    
+    </div>
+    
+    <!-- </div> -->

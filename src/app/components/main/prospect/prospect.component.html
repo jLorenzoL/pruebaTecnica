@@ -1,0 +1,136 @@
+<!-- <div class="container"> -->
+<div class="row justify-content-center align-items-center bg-succes" style="padding-top: 10%;">
+    <div class="col-sm-5">
+        <div class="row justify-content-center">
+            <h5 class="text-center">¡Se un agente multibanca Kasnet!</h5>
+            <p></p>
+            <div class="col-sm-12">
+                <form novalidate  [formGroup]="prospectForm" (submit)="saveInformation()">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <input type="text" [required] class="form-control" formControlName="nameFormControl"
+                                    placeholder="Nombres"
+                                    [ngClass]="{'is-invalid': prospectForm.get('nameFormControl').errors && (prospectForm.get('nameFormControl').touched || 
+                                                    prospectForm.get('nameFormControl').dirty), 'is-valid':prospectForm.get('nameFormControl').valid}">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" formControlName="LastNameFormControl"
+                                    placeholder="Apellido Paterno"
+                                    [ngClass]="{'is-invalid': prospectForm.get('LastNameFormControl').errors && (prospectForm.get('LastNameFormControl').touched || 
+                                                    prospectForm.get('LastNameFormControl').dirty), 'is-valid':prospectForm.get('LastNameFormControl').valid}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" formControlName="LastNameMFormControl"
+                                    placeholder="Apellido Materno"
+                                    [ngClass]="{'is-invalid': prospectForm.get('LastNameMFormControl').errors && (prospectForm.get('LastNameMFormControl').touched || 
+                                                    prospectForm.get('LastNameMFormControl').dirty), 'is-valid':prospectForm.get('LastNameMFormControl').valid}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" formControlName="emailFormControl"
+                                    placeholder="Correo Electrónico"
+                                    [ngClass]="{'is-invalid': prospectForm.get('emailFormControl').errors && (prospectForm.get('emailFormControl').touched || 
+                                                    prospectForm.get('emailFormControl').dirty), 'is-valid':prospectForm.get('emailFormControl').valid}">
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                    <select (change)="selectEmail()" formControlName="listEmailFormControl"
+                                        class="form-select" (ngModel)="lstDomain"
+                                        [ngClass]="{'is-invalid': prospectForm.get('listEmailFormControl').touched && (prospectForm.get('listEmailFormControl').value == '0' || prospectForm.get('listEmailFormControl').value == '5'), 
+                                                    'is-valid': prospectForm.get('listEmailFormControl').value !='0'}">
+                                        <option selected value="0">Seleccione</option>
+                                        <option *ngFor="let dmn of lstDomain" [ngValue]="dmn">
+                                            {{dmn.value}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <select formControlName="isRucFormControl" class="form-select" [ngClass]="{'is-invalid': prospectForm.get('isRucFormControl').touched && prospectForm.get('isRucFormControl').value == '0', 
+                                                'is-valid':prospectForm.get('isRucFormControl').value !='0'}">
+                                <option value="0">¿Cuenta con RUC?</option>
+                                <option value="1">Si</option>
+                                <option value="2">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <select formControlName="departmentFormControl" placeholder="Departamento"
+                                class="form-select" (change)="selectDepartament()" (ngModel)="lstDepartamento"
+                                [ngClass]="{'is-invalid' : prospectForm.get('departmentFormControl').touched && prospectForm.get('departmentFormControl').value == '0',
+                                            'is-valid': prospectForm.get('departmentFormControl').value !='0'}">
+                                <option selected value="0">Departamento</option>
+                                <option *ngFor="let dpto of lstDepartamento" [ngValue]="dpto">
+                                    {{dpto.nombre_ubigeo}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <select formControlName="provinceFormControl" placeholder="Provincia" class="form-select"
+                                (change)="selectProvince()" (ngModel)="lstProvince"
+                                [ngClass]="{'is-invalid' : prospectForm.get('provinceFormControl').touched && prospectForm.get('provinceFormControl').value == '0',
+                                            'is-valid': prospectForm.get('provinceFormControl').value !='0'}">
+                                <option selected value="0">Provincia</option>
+                                <option *ngFor="let prov of lstProvince" [ngValue]="prov">
+                                    {{prov.nombre_ubigeo}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <select formControlName="districtFormControl" placeholder="Distrito" class="form-select"
+                                (ngModel)="lstDistrict"
+                                [ngClass]="{'is-invalid' : prospectForm.get('districtFormControl').touched && prospectForm.get('districtFormControl').value == '0',
+                                            'is-valid': prospectForm.get('districtFormControl').value !='0'}">
+                                <option selected value="0">Distrito</option>
+                                <option *ngFor="let dsto of lstDistrict" [value]="dsto">
+                                    {{dsto.nombre_ubigeo}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row justify-content-center">
+                            <div class="col-sm-12">
+                                <re-captcha (resolved)="resolved($event)"
+                                    siteKey="6LeRL3IaAAAAAIB0Tokone5Bf2bTQiPv-_J_h5Et"></re-captcha>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons-row row">
+                        <div class="col-sm-12">
+                            <button class="btn-block" mat-flat-button color="primary">Registrarse></button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- </div> -->

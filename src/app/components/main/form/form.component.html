@@ -1,0 +1,406 @@
+    <div class="container animated fadeIn fast" style="padding-bottom: 50px;">
+        <div class="row justify-content-center align-items-center bg-succes" style="padding-top: 5%;">
+            <div class="col-sm-12">
+                <div class="row justify-content-center">
+                    <p class="text-center"><strong>Validación de tu RUC y dirección</strong></p>
+                    <p></p>
+                    <div class="col-sm-12">
+                        <form [formGroup]="validateForm">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-4" style="padding-top: 8px;">
+                                        <mat-radio-group formControlName="typePersonFormControl" [(ngModel)]="typePerson">
+                                            <mat-radio-button value="1">Persona Natural</mat-radio-button>
+                                            <mat-radio-button checked value="2">Persona Jurídica</mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control" formControlName="rucFormControl" placeholder="Ingrese RUC" maxlength="11"
+                                                    [ngClass]="{'is-invalid': validateForm.get('rucFormControl').errors && (validateForm.get('rucFormControl').touched || 
+                                                    validateForm.get('rucFormControl').dirty), 'is-valid':validateForm.get('rucFormControl').valid}">
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" formControlName="dniFormControl" maxlength="8"
+                                                    [placeholder]="typePerson!='1' ? 'Ingresar DNI del Representante Legal' : 
+                                                                                           'Ingresar DNI del titular del comercio'"
+                                                    [ngClass]="{'is-invalid': validateForm.get('dniFormControl').errors && (validateForm.get('dniFormControl').touched || 
+                                                    validateForm.get('dniFormControl').dirty), 'is-valid':validateForm.get('dniFormControl').valid}">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <button (click)="sendRuc()" mat-flat-button color="primary">Registrar RUC></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p></p>
+                            <div *ngIf="showDetail">
+                                <div class="form-group animated fadeIn fast">
+                                    <div class="row">
+                                        <p>Informacion del Agente Registrado en SUNAT</p>
+                                        <div>
+                                            <mat-card>
+                                                <div class="row">
+                                                    <div class="col-sm-2">
+                                                        <label>RUC :</label>
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <input [(ngModel)]="userModel.rucSunat" formControlName="rucSunatFormControl" disabled class="form-control">
+                                                    </div>
+                                                </div>
+                                                <p></p>
+                                                <div class="row">
+                                                    <div class="col-sm-2">
+                                                        <label>Nombre o Razon social :</label>
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <input [(ngModel)]="userModel.razonSocial" formControlName="rznSocSunatFormControl" disabled class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-2">
+                                                        <label>Estado del contribuyente :</label>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input [(ngModel)]="userModel.estContr" formControlName="estContrSunatFormControl" disabled class="form-control">
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Condicion del domicilio :</label>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input [(ngModel)]="userModel.condDomi" formControlName="condDomiSunatFormControl" disabled class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-2">
+                                                        <label>Tipo de Via :</label>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <input [(ngModel)]="userModel.tipoVia" formControlName="tipoViaSunatFormControl" disabled class="form-control">
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Nombre de via :</label>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <input [(ngModel)]="userModel.nombVia" formControlName="nombViaSunatFormControl" disabled class="form-control">
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Numero :</label>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <input [(ngModel)]="userModel.numDomic" formControlName="numDomicSunatFormControl" disabled class="form-control">
+                                                    </div>
+                                                </div>
+                                                <p></p>
+                                                <div class="row">
+                                                    <div class="col-sm-2">
+                                                        <label>Interior :</label>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <input [(ngModel)]="userModel.intDomic" formControlName="intDomicSunatFormControl" disabled disabled class="form-control">
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Lote :</label>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <input [(ngModel)]="userModel.loteDomic" formControlName="loteDomicSunatFormControl" disabled class="form-control">
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Departamento :</label>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <input [(ngModel)]="userModel.departamento" formControlName="departamentoSunatFormControl" disabled class="form-control">
+                                                    </div>
+                                                </div>
+                                                <p></p>
+                                                <div class="row">
+                                                    <div class="col-sm-2">
+                                                        <label>Manzana :</label>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <input [(ngModel)]="userModel.mznDomic" formControlName="mznDomicSunatFormControl" disabled class="form-control">
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Kilometro :</label>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <input [(ngModel)]="userModel.kmDomic" formControlName="kmDomicSunatFormControl" disabled class="form-control">
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Ubigeo :</label>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <input [(ngModel)]="userModel.ubigeo" formControlName="ubigeoSunatFormControl" disabled class="form-control">
+                                                    </div>
+                                                </div>
+                                            </mat-card>
+                                        </div>
+                                    </div>
+    
+                                </div>
+                                <p></p>
+                                <div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <mat-checkbox [checked]="false" (change)="onChkChange()" class="example-margin">La
+                                            direccion mostrada corresponde
+                                            a la direccion actual de mi LOCAL COMERCIAL.
+                                        </mat-checkbox>
+                                        <p></p>
+                                        <div *ngIf="showAddresDetail">
+                                            <mat-card>
+                                                <div class="row animated fadeIn fast">
+                                                    <p>Direccion del comercio</p>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-sm-2">
+                                                                <input type="text" class="form-control">
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <input type="text" formControlName="nombViaFormControl" placeholder="Nombre de la via" class="form-control"
+                                                                [ngClass]="{'is-invalid': validateForm.get('nombViaFormControl').errors && (validateForm.get('nombViaFormControl').touched || 
+                                                                validateForm.get('nombViaFormControl').dirty), 'is-valid':validateForm.get('nombViaFormControl').valid}">
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <input type="text" formControlName="numFormControl" placeholder="Numero" class="form-control"
+                                                                [ngClass]="{'is-invalid': validateForm.get('numFormControl').errors && (validateForm.get('numFormControl').touched || 
+                                                                validateForm.get('numFormControl').dirty), 'is-valid':validateForm.get('numFormControl').valid}">
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <input type="text" formControlName="intFormControl" placeholder="Interior" class="form-control"
+                                                                [ngClass]="{'is-invalid': validateForm.get('intFormControl').errors && (validateForm.get('intFormControl').touched || 
+                                                                validateForm.get('intFormControl').dirty), 'is-valid':validateForm.get('intFormControl').valid}">
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <input type="text" formControlName="loteFormControl" placeholder="Lote" class="form-control"
+                                                                [ngClass]="{'is-invalid': validateForm.get('loteFormControl').errors && (validateForm.get('loteFormControl').touched || 
+                                                                validateForm.get('loteFormControl').dirty), 'is-valid':validateForm.get('loteFormControl').valid}">
+                                                            </div>
+                                                        </div>
+                                                        <p></p>
+                                                        <div class="row">
+                                                            <div class="col-sm-2">
+                                                                <input type="text" formControlName="mznaFormControl" placeholder="Manzana" class="form-control"
+                                                                [ngClass]="{'is-invalid': validateForm.get('mznaFormControl').errors && (validateForm.get('mznaFormControl').touched || 
+                                                                validateForm.get('mznaFormControl').dirty), 'is-valid':validateForm.get('mznaFormControl').valid}">
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <input type="text" formControlName="kmFormControl" placeholder="Kilómetro" class="form-control"
+                                                                [ngClass]="{'is-invalid': validateForm.get('kmFormControl').errors && (validateForm.get('kmFormControl').touched || 
+                                                                validateForm.get('kmFormControl').dirty), 'is-valid':validateForm.get('kmFormControl').valid}">
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <select formControlName="departmentFormControl" placeholder="Departamento"
+                                                                    class="form-select" (change)="selectDepartament()" (ngModel)="lstDepartamento"
+                                                                    [ngClass]="{'is-invalid' : validateForm.get('departmentFormControl').touched && validateForm.get('departmentFormControl').value == '0',
+                                                                                'is-valid': validateForm.get('departmentFormControl').value !='0'}">
+                                                                    <option selected value="0">Departamento</option>
+                                                                    <option *ngFor="let dpto of lstDepartamento" [ngValue]="dpto">
+                                                                        {{dpto.nombre_ubigeo}}
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <select formControlName="provinceFormControl" placeholder="Provincia" class="form-select"
+                                                                    (change)="selectProvince()" (ngModel)="lstProvince"
+                                                                    [ngClass]="{'is-invalid' : validateForm.get('provinceFormControl').touched && validateForm.get('provinceFormControl').value == '0',
+                                                                                'is-valid': validateForm.get('provinceFormControl').value !='0'}">
+                                                                    <option selected value="0">Provincia</option>
+                                                                    <option *ngFor="let prov of lstProvince" [ngValue]="prov">
+                                                                        {{prov.nombre_ubigeo}}
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <select formControlName="districtFormControl" placeholder="Distrito" class="form-select"
+                                                                    (ngModel)="lstDistrict"
+                                                                    [ngClass]="{'is-invalid' : validateForm.get('districtFormControl').touched && validateForm.get('districtFormControl').value == '0',
+                                                                                'is-valid': validateForm.get('districtFormControl').value !='0'}">
+                                                                    <option selected value="0">Distrito</option>
+                                                                    <option *ngFor="let dsto of lstDistrict" [value]="dsto">
+                                                                        {{dsto.nombre_ubigeo}}
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+    
+                                            </mat-card>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    
+                                    <div class="row">
+                                        <div>
+                                            <mat-card>
+                                                
+                                                <div class="row">
+                                                    
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div class="row">
+                                                                    <div class="col-sm-4">
+                                                                        <label>Razon Social :</label>
+                                                                    </div>
+                                                                    <div class="col-sm-8">
+                                                                        <input type="text" formControlName="rznSocFormControl" class="form-control"
+                                                                        [ngClass]="{'is-invalid': validateForm.get('rznSocFormControl').errors && (validateForm.get('rznSocFormControl').touched || 
+                                                                        validateForm.get('rznSocFormControl').dirty), 'is-valid':validateForm.get('rznSocFormControl').valid}">    
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <div class="row">
+                                                                    <div class="col-sm-4">
+                                                                        <label>Denominacion comercial :</label>
+                                                                    </div>
+                                                                    <div class="col-sm-8">
+                                                                        <input type="text" formControlName="denomComercFormControl" class="form-control"
+                                                                        [ngClass]="{'is-invalid': validateForm.get('denomComercFormControl').errors && (validateForm.get('denomComercFormControl').touched || 
+                                                                        validateForm.get('denomComercFormControl').dirty), 'is-valid':validateForm.get('denomComercFormControl').valid}">    
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div class="row">
+                                                                    <div class="col-sm-4">
+                                                                        <label>CIIU:</label>
+                                                                    </div>
+                                                                    <div class="col-sm-8">
+                                                                        <input type="text" formControlName="ciiuFormControl" class="form-control"
+                                                                        [ngClass]="{'is-invalid': validateForm.get('ciiuFormControl').errors && (validateForm.get('ciiuFormControl').touched || 
+                                                                        validateForm.get('ciiuFormControl').dirty), 'is-valid':validateForm.get('ciiuFormControl').valid}">  
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <div class="row">
+                                                                    <div class="col-sm-4">
+                                                                        <label>Años de Experiencia en Mdo :</label>
+                                                                    </div>
+                                                                    <div class="col-sm-8">
+                                                                        <input type="text" formControlName="expFormControl" class="form-control"
+                                                                        [ngClass]="{'is-invalid': validateForm.get('expFormControl').errors && (validateForm.get('expFormControl').touched || 
+                                                                        validateForm.get('expFormControl').dirty), 'is-valid':validateForm.get('expFormControl').valid}"> 
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <p>Regimen Tributario</p>
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <mat-radio-group>
+                                                                <div class="row">
+                                                                    
+                                                                    <div class="col-sm-4">
+                                                                        
+                                                                            <mat-radio-button value="1">Regimen general (RG)</mat-radio-button>
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                            <mat-radio-button value="2">Regimen unico simplificado (RUS)</mat-radio-button>
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                            <mat-radio-button value="3">Regimen especial renta (RER)</mat-radio-button>
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                                <p></p>
+                                                                <div class="row">
+                                                                    <div class="col-sm-4">
+                                                                            <mat-radio-button value="4">Regimen Mype Tribitario (RMT)</mat-radio-button>
+                                                                    </div>
+                                                                </div>
+                                                                </mat-radio-group>
+                                                            </div>
+                                                        </div>
+                                                        <p></p>
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div class="row">
+                                                                    <div class="col-sm-4">
+                                                                        <label>Cargo:</label>
+                                                                    </div>
+                                                                    <div class="col-sm-8">
+                                                                        <input type="text" formControlName="roleFormControl" class="form-control"
+                                                                        [ngClass]="{'is-invalid': validateForm.get('roleFormControl').errors && (validateForm.get('roleFormControl').touched || 
+                                                                        validateForm.get('roleFormControl').dirty), 'is-valid':validateForm.get('roleFormControl').valid}">   
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <div class="row">
+                                                                    <div class="col-sm-4">
+                                                                        <label>Poderes Inscritos :</label>
+                                                                    </div>
+                                                                    <div class="col-sm-8">
+                                                                        <input type="text" formControlName="powerFormControl" class="form-control"
+                                                                        [ngClass]="{'is-invalid': validateForm.get('powerFormControl').errors && (validateForm.get('powerFormControl').touched || 
+                                                                        validateForm.get('powerFormControl').dirty), 'is-valid':validateForm.get('powerFormControl').valid}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+    
+                                            </mat-card>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div>
+                                            <mat-card>
+                                                <div class="row">
+                                                    <p>De contar con un AFILIADOR ingrese su DNI, de lo contrario dejar este dato en blanco</p>
+                                                    <p>Ejecutivo Comercial(Afiliador)</p>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <input type="text" formControlName="dniEjecComercFormControl" placeholder="DNI del Ejecutivo Comercial" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+    
+                                            </mat-card>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <button class="btn-block" mat-flat-button color="primary">Cancelar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <button class="btn-block" (click)="saveLocal()" mat-flat-button color="primary">Guardar Informacion></button>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <button class="btn-block" mat-flat-button color="primary">Enviar Informacion></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

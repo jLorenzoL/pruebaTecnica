@@ -1,0 +1,22 @@
+[
+    {
+        "id"    : 1,
+        "value" : "gmail.com"
+    },
+    {
+        "id"    : 2,
+        "value" : "hotmail.com"
+    },
+    {
+        "id"    : 3,
+        "value" : "outlook.live.com"
+    },
+    {
+        "id"    : 4,
+        "value" : "yahoo.com"
+    },
+    {
+        "id"    : 5,
+        "value" : "Otros"
+    }
+]

@@ -1,0 +1,21 @@
+<h1 mat-dialog-title class="text-center">Ingrese su dominio</h1>
+<div mat-dialog-content>
+    <form [formGroup]="modalForm">
+        <input type="text" class="form-control" formControlName="domainFormControl" placeholder="ejemplo.com" 
+        [ngClass]="{'is-invalid': modalForm.get('domainFormControl').errors && (modalForm.get('domainFormControl').touched || 
+                    modalForm.get('domainFormControl').dirty), 'is-valid':modalForm.get('domainFormControl').valid}">
+    </form>
+    
+</div>
+<div mat-dialog-actions>
+  <div class="row">
+      <div class="col-sm-6 pull-left">
+        <button mat-flat-button (click)="closeDialog()">Cancelar</button>
+      </div>
+      <div class="col-sm-6 pull-right">
+        <button mat-flat-button color="primary" (click)="addDomain()">Guardar</button>
+      </div>
+  </div>
+  
+  
+</div>
