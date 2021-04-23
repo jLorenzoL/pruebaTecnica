@@ -1,0 +1,50 @@
+<div class="container animated fadeIn fast" style="padding-bottom: 50px;">
+    <div class="row justify-content-center align-items-center bg-succes" style="padding-top: 5%;">
+        <div class="col-sm-12">
+            <div class="row justify-content-center">
+                <!-- <p class="text-center">report works!</p> -->
+                <div class="mat-elevation-z8">
+                    <div *ngIf="dataSource">
+                        <table mat-table [dataSource]="dataSource.tutorials">
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+                            <ng-container matColumnDef="borough">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Borough </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.borough}} </mat-cell>
+                            </ng-container>
+    
+                            <ng-container matColumnDef="cuisine">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Cuisine </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.cuisine}} </mat-cell>
+                            </ng-container>
+    
+                            <ng-container matColumnDef="name">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="accion">
+                                <mat-header-cell  *matHeaderCellDef > Actions </mat-header-cell>
+                                <mat-cell *matCellDef="let row" >
+                                    <button mat-raised-button color="primary" (click)="editAttribute(row)">Edit</button>
+                                </mat-cell>
+                            </ng-container>
+                        </table>
+                      
+                        <mat-paginator 
+                                    [length] = "dataSource.paginacion.totalRegistros"
+                                    [pageSize] = "dataSource.paginacion.registros"
+                                    [pageSizeOptions]="[5, 10, 25, 100]" 
+                                    (page)="onPaginateChange($event)"
+                                    showFirstLastButtons>
+                        </mat-paginator>
+                    </div>
+                    
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

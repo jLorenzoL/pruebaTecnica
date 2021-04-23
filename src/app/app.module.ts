@@ -1,10 +1,13 @@
+import { ReportDetailComponent } from './components/main/report/detail/reportDetail.component';
+import { BsDropdownConfig, BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ReportService } from './services/report.service';
 
 import { LoginComponent } from './components/main/login/login.component';
 import { MailService } from './services/mail.service';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { ProspectService } from './services/prospect.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { APP_ROUTING } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +23,11 @@ import { ModalComponent } from './components/shared/modal/modal.component';
 import { RECAPTCHA_SETTINGS, RecaptchaSettings, RecaptchaModule, RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from "ng-recaptcha";
 import { FormComponent } from './components/main/form/form.component';
 import { ValidationService } from './services/validation.service';
+import { ReportComponent } from './components/main/report/report.component';
+import { PaginacionSetComponent } from './components/shared/pagination/paginacion-set.component';
+import { PaginacionInfoComponent } from './components/shared/pagination/paginacion-info.component';
+import { CommonModule } from '@angular/common';
+import { PaginacionModule } from './components/shared/pagination/paginacion.module';
 
 @NgModule({
   declarations: [
@@ -27,8 +35,10 @@ import { ValidationService } from './services/validation.service';
     HeaderComponent,
     ProspectComponent,
     ModalComponent,
+    ReportDetailComponent,
     LoginComponent,
-    FormComponent
+    FormComponent,
+    ReportComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,9 +54,11 @@ import { ValidationService } from './services/validation.service';
     ProspectService,
     GeneralService,
     MailService,
-    ValidationService
+    ValidationService,
+    ReportService,
+    BsDropdownConfig
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ModalComponent]
+  entryComponents: [ModalComponent,ReportDetailComponent]
 })
 export class AppModule { }

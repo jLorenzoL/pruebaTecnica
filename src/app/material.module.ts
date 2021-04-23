@@ -9,12 +9,11 @@ import { MatFormFieldModule,
          MatInputModule,
          MatSelectModule,
          MatDialogModule,
-         MatHint,
-         MatLabel, 
-         ErrorStateMatcher,
-         ShowOnDirtyErrorStateMatcher,
          MatRadioModule,
-         MatCheckboxModule} from '@angular/material';
+         MatTableModule,
+         MatPaginator,
+         MatCheckboxModule,
+         MatPaginatorModule} from '@angular/material';
 
 const moduleMaterial = [
   MatFormFieldModule,
@@ -27,7 +26,9 @@ const moduleMaterial = [
   MatDialogModule,
   MatRadioModule,
   MatCardModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatTableModule,
+  MatPaginatorModule
 ];
 
 @NgModule({

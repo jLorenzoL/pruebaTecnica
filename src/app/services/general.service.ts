@@ -91,4 +91,16 @@ export class GeneralService {
         return lstDistrict;
     }
 
+    agregarItem(listaResultados:any[],datosPaginacion:any):any[]{
+        let  contador:number;
+        contador = (datosPaginacion.pagina - 1)*datosPaginacion.registros + 1;
+        listaResultados.forEach(element => {
+         element.item = contador;
+         contador++;
+        });
+     
+        return listaResultados;
+     
+     }
+
 }
